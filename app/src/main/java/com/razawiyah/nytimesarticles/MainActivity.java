@@ -2,6 +2,7 @@ package com.razawiyah.nytimesarticles;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -17,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     ViewPagerAdapter viewPagerAdapter;
     ViewPager2 viewPager2;
     BottomNavigationView bottomNavigationView;
+    SearchView searchView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,5 +69,10 @@ public class MainActivity extends AppCompatActivity {
                 super.onPageSelected(position);
             }
         });
+
+
+        //search bar
+        searchView = findViewById(R.id.searchView);
+
     }
 }
