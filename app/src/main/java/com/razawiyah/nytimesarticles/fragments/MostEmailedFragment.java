@@ -5,17 +5,24 @@ import static android.content.ContentValues.TAG;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.razawiyah.nytimesarticles.R;
+import com.razawiyah.nytimesarticles.adapters.NewsRecyclerAdapter;
 import com.razawiyah.nytimesarticles.apis.ApiClient;
 import com.razawiyah.nytimesarticles.apis.ApiResponse;
 import com.razawiyah.nytimesarticles.apis.ApiServices;
 import com.razawiyah.nytimesarticles.utils.PopupUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,11 +32,29 @@ public class MostEmailedFragment extends Fragment {
 
     ApiServices apiServices;
     private static final String API_KEY = "Lm61K8L0sLAMcPCHDYXGFzjAnyf0H6ZI";
+
+    RecyclerView recyclerView;
+    List<ApiResponse.Article> articleList = new ArrayList<>();
+    NewsRecyclerAdapter newsRecyclerAdapter;
+    LinearProgressIndicator linearProgressIndicator;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_most_emailed, container, false);
 
+        //recycler view part
+        recyclerView = view.findViewById(R.id.recyclerViewME);
+        linearProgressIndicator = view.findViewById(R.id.progressIndicatorME);
+
+        setRecyclerView();
+        setNews();
+
+        return view;
+    }
+
+    private void setNews(){
+        changeInProgress(true);
         apiServices = ApiClient.getClient().create(ApiServices.class);
         Call<ApiResponse> call = apiServices.getMostEmailed(API_KEY);
 
@@ -40,10 +65,17 @@ public class MostEmailedFragment extends Fragment {
                     ApiResponse mostViewed = response.body();
 
                     if(mostViewed != null){
-                        if (mostViewed.results != null){
-                            for (ApiResponse.Article article: mostViewed.results){
-                                Log.d(TAG, "title: " + article.title);
+                        if (mostViewed.getResults() != null){
+                            for (ApiResponse.Article article: mostViewed.getResults()){
+                                Log.d(TAG, "title: " + article.getTitle());
+                                articleList = mostViewed.getResults();
+                                newsRecyclerAdapter.updateData(articleList);
+                                newsRecyclerAdapter.notifyDataSetChanged();
                             }
+                            Log.d(TAG, "Most Viewed Done");
+                            changeInProgress(false);
+
+
                         }else {
                             PopupUtils.showAlert(getActivity(), "No Result!", "Data Not Fetched!");
                         }
@@ -61,6 +93,19 @@ public class MostEmailedFragment extends Fragment {
 
             }
         });
+    }
 
-        return view;    }
+    private void setRecyclerView(){
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        newsRecyclerAdapter = new NewsRecyclerAdapter(articleList);
+        recyclerView.setAdapter(newsRecyclerAdapter);
+    }
+
+    public void changeInProgress(boolean show){
+        if (show){
+            linearProgressIndicator.setVisibility(View.VISIBLE);
+        } else {
+            linearProgressIndicator.setVisibility(View.INVISIBLE);
+        }
+    }
 }
