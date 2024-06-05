@@ -2,16 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/bottom_home"
-        android:title="Home"
-        android:icon="@drawable/icon_home"/>
+        android:title="Most Viewed"
+        android:icon="@drawable/icon_most_viewed"/>
 
     <item
         android:id="@+id/bottom_support"
-        android:title="Support"
-        android:icon="@drawable/icon_support"/>
+        android:title="Most Shared"
+        android:icon="@drawable/icon_most_shared"/>
 
     <item
     android:id="@+id/bottom_download"
-    android:title="Download"
-    android:icon="@drawable/icon_download"/>
+    android:title="Most Emailed"
+    android:icon="@drawable/icon_most_emailed"/>
 </menu>
