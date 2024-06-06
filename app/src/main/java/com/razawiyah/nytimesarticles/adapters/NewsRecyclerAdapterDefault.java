@@ -1,5 +1,6 @@
 package com.razawiyah.nytimesarticles.adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.razawiyah.nytimesarticles.FullArticle;
 import com.razawiyah.nytimesarticles.R;
 import com.razawiyah.nytimesarticles.apis.ApiResponseDefault;
 import com.razawiyah.nytimesarticles.utils.DateUtils;
@@ -39,6 +41,15 @@ public class NewsRecyclerAdapterDefault extends RecyclerView.Adapter<NewsRecycle
         holder.dateTV.setText(formattedDate);
 
         holder.abstractTV.setText(article.getAbstractText());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), FullArticle.class);
+                intent.putExtra("url", article.getUrl());
+                v.getContext().startActivity(intent);
+            }
+        });
 
         if (article.getMedia() != null && !article.getMedia().isEmpty()) {
             ApiResponseDefault.Article.Media media = article.getMedia().get(0);
