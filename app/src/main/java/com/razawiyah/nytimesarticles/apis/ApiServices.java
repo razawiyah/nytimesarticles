@@ -19,4 +19,11 @@ public interface ApiServices {
     Call<ApiResponse> getMostEmailed(
             @Query ("api-key") String apiKey
     );
+
+    @GET("svc/search/v2/articlesearch.json")
+    Call<ApiResponse> getSearchResult(
+            @Query ("api-key") String apiKey,
+            @Query ("q") String keyword
+
+    );
 }

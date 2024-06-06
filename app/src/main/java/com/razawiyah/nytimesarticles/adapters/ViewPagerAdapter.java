@@ -10,6 +10,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import com.razawiyah.nytimesarticles.fragments.MostEmailedFragment;
 import com.razawiyah.nytimesarticles.fragments.MostViewedFragment;
 import com.razawiyah.nytimesarticles.fragments.MostSharedFragment;
+import com.razawiyah.nytimesarticles.fragments.SearchFragment;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
     public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
@@ -31,12 +32,13 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
             case 0: return new MostViewedFragment();
             case 1: return new MostSharedFragment();
             case 2: return new MostEmailedFragment();
+            case 3: return new SearchFragment();
             default: return new MostViewedFragment();
         }
     }
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 4;
     }
 }

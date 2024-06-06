@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
     ViewPagerAdapter viewPagerAdapter;
     ViewPager2 viewPager2;
     BottomNavigationView bottomNavigationView;
-    SearchView searchView;
 
 
     @Override
@@ -38,12 +37,14 @@ public class MainActivity extends AppCompatActivity {
                 int id = item.getItemId();
 
                 // the old video uses switch. cannot use switch anymore as th R is not a constant so use if else instead
-                if(id == R.id.bottom_home){
+                if (id == R.id.bottom_home) {
                     viewPager2.setCurrentItem(0);
-                } else if (id == R.id.bottom_support) {
+                } else if (id == R.id.bottom_support) { //most viewed
                     viewPager2.setCurrentItem(1);
-                }else if (id == R.id.bottom_download) {
+                } else if (id == R.id.bottom_download) { //most shared
                     viewPager2.setCurrentItem(2);
+                } else if (id == R.id.bottom_search) { //most emailed
+                    viewPager2.setCurrentItem(3);
                 }
 
                 return false;
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
 
-                switch (position){
+                switch (position) {
                     case 0:
                         bottomNavigationView.getMenu().findItem(R.id.bottom_home).setChecked(true);
                         break;
@@ -64,15 +65,13 @@ public class MainActivity extends AppCompatActivity {
                     case 2:
                         bottomNavigationView.getMenu().findItem(R.id.bottom_download).setChecked(true);
                         break;
+                    case 3:
+                        bottomNavigationView.getMenu().findItem(R.id.bottom_search).setChecked(true);
+                        break;
                 }
 
                 super.onPageSelected(position);
             }
         });
-
-
-        //search bar
-        searchView = findViewById(R.id.searchView);
-
     }
 }

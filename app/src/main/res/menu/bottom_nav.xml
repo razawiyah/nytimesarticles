@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
     <item
         android:id="@+id/bottom_home"
         android:title="Most Viewed"
@@ -14,4 +17,9 @@
     android:id="@+id/bottom_download"
     android:title="Most Emailed"
     android:icon="@drawable/icon_most_emailed"/>
+
+    <item
+        android:id="@+id/bottom_search"
+        android:title="Search"
+        android:icon="@drawable/icon_most_search"/>
 </menu>
