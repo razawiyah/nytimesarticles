@@ -67,7 +67,7 @@ public class MostEmailedFragment extends Fragment {
                     if(mostViewed != null){
                         if (mostViewed.getResults() != null){
                             for (ApiResponse.Article article: mostViewed.getResults()){
-                                Log.d(TAG, "title: " + article.getTitle());
+//                                Log.d(TAG, "title: " + article.getTitle());
                                 articleList = mostViewed.getResults();
                                 newsRecyclerAdapter.updateData(articleList);
                                 newsRecyclerAdapter.notifyDataSetChanged();

@@ -6,14 +6,45 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.SearchFragment">
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:layout_constraintVertical_bias="0.0"
-        android:background="@drawable/border_black"
-        app:iconifiedByDefault="false"
-        app:queryHint="Search Here..."/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:layout_constraintVertical_bias="0.0"
+            android:background="@drawable/border_black"
+            app:iconifiedByDefault="false"
+            app:queryHint="Search Here..."/>
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progressIndicatorS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewS"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp" />
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
 </FrameLayout>

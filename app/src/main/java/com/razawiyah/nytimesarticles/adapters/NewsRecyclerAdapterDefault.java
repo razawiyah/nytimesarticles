@@ -10,16 +10,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.razawiyah.nytimesarticles.R;
-import com.razawiyah.nytimesarticles.apis.ApiResponse;
+import com.razawiyah.nytimesarticles.apis.ApiResponseDefault;
 import com.razawiyah.nytimesarticles.utils.DateUtils;
 import com.squareup.picasso.Picasso;
 
+import java.util.Date;
 import java.util.List;
 
-public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapter.NewsViewHolder> {
+public class NewsRecyclerAdapterDefault extends RecyclerView.Adapter<NewsRecyclerAdapterDefault.NewsViewHolder> {
 
-    List<ApiResponse.Article> articleList;
-    public NewsRecyclerAdapter(List<ApiResponse.Article> articleList){
+    List<ApiResponseDefault.Article> articleList;
+    public NewsRecyclerAdapterDefault(List<ApiResponseDefault.Article> articleList){
         this.articleList = articleList;
     }
 
@@ -32,21 +33,18 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
-        ApiResponse.Article article = articleList.get(position);
+        ApiResponseDefault.Article article = articleList.get(position);
         holder.titleTV.setText(article.getTitle());
-
         String formattedDate = DateUtils.formatPublishedDate(article.getPublished_date());
         holder.dateTV.setText(formattedDate);
 
         holder.abstractTV.setText(article.getAbstractText());
 
         if (article.getMedia() != null && !article.getMedia().isEmpty()) {
-            ApiResponse.Article.Media media = article.getMedia().get(0);
-            if (media.getMediaMetadata() != null && !media.getMediaMetadata().isEmpty()) {
-                ApiResponse.Article.Media.MediaMetadata mediaMetadata = media.getMediaMetadata().get(0);
-//                System.out.println("Image URL: " + mediaMetadata.getUrl());
+            ApiResponseDefault.Article.Media media = article.getMedia().get(0);
+            if (media.getUrl() != null && !media.getUrl().isEmpty()) {
 
-                Picasso.get().load(mediaMetadata.getUrl())
+                Picasso.get().load(media.getUrl())
                         .error(R.drawable.icon_iamge_error)
                         .placeholder(R.drawable.icon_iamge_error)
                         .into(holder.articleImg);
@@ -56,7 +54,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
 
     }
 
-    public void updateData(List<ApiResponse.Article> data){
+    public void updateData(List<ApiResponseDefault.Article> data){
         articleList.clear();
         articleList.addAll(data);
     }

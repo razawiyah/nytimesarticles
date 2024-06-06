@@ -28,17 +28,25 @@
                 android:id="@+id/article_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="4dp"
                 android:text="Title"/>
+
+            <TextView
+                android:id="@+id/article_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:justificationMode="inter_word"
+                android:text="Published Date"/>
 
             <TextView
                 android:id="@+id/article_abstract"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
+                android:textSize="11sp"
                 android:justificationMode="inter_word"
                 android:text="abstract"/>
         </LinearLayout>

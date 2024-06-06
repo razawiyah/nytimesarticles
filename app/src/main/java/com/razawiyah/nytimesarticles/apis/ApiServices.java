@@ -26,4 +26,9 @@ public interface ApiServices {
             @Query ("q") String keyword
 
     );
+
+    @GET("svc/topstories/v2/home.json")
+    Call<ApiResponseDefault> getDefaultResult(
+            @Query ("api-key") String apiKey
+    );
 }
