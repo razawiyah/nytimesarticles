@@ -21,7 +21,7 @@ public interface ApiServices {
     );
 
     @GET("svc/search/v2/articlesearch.json")
-    Call<ApiResponse> getSearchResult(
+    Call<ApiResponseSearch> getSearchResult(
             @Query ("api-key") String apiKey,
             @Query ("q") String keyword
 
